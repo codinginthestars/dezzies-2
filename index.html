@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dezzie's Doodle</title>
+    <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Dezzie's Doodle</h1>
+            <p>Explore my collection of artworks</p>
+            <nav>
+                <ul class="filter-buttons">
+                    <li><button data-filter="all" class="active">All</button></li>
+                    <li><button data-filter="painting">Painting</button></li>
+                    <li><button data-filter="digital">Digital Art</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container gallery">
+            <!-- Artwork Items -->
+             <div class="gallery-item" data-category="painting">
+                <img src="" alt="">
+                <h3>Sunset Bliss</h3>
+             </div>
+        </div>
+    </main>
+
+    <!-- Modal for Lightbox -->
+    <div id="lightbox-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="lightbox-image" alt="Large View">
+    </div>
+
+    <!-- Contact Me -->
+     <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form" action="http://localhost:3000/submit" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+     </section>
+
+    <footer>
+        <p>&copy; 2024 Dezzie's Doodles. All rights reserved.</p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>
