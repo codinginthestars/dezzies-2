@@ -30,11 +30,13 @@ const lightboxImage = document.getElementById('lightbox-image');
 const closeLightbox = document.querySelector('.close-modal');
 
 // Open modal on gallery image click
-galleryItems.forEach((item) => {
+galleryItems.forEach((item, index) => {
     item.addEventListener('click', () => {
         const imgSrc = item.querySelector('img').src;
         lightboxImage.src = imgSrc;
         lightboxModal.style.display = 'block';
+        currentImageIndex = index;
+        showLightboxImage();
     });
 });
 
@@ -50,5 +52,54 @@ lightboxModal.addEventListener('click', (e) => {
     }
 });
 
-
+// Handle form submission with fetch
 const contactForm = document.getElementById('contact-form');
+
+contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        contactForm.reset();
+    } catch (error) {
+        console.error('Error: ', error);
+        alert('There was an error submitting the form. Please try again later.');
+    }
+});
+
+// Lightbox navigation
+let currentImageIndex = 0;
+const galleryImagesArray = Array.from(galleryItems).map((item) => item.querySelector('img').src);
+const prevArrow = document.querySelector('.prev-arrow');
+const nextArrow = document.querySelector('.next-arrow');
+
+// Show current image in the modal
+function showLightboxImage() {
+    lightboxImage.src = galleryImagesArray[currentImageIndex];
+    lightboxModal.style.display = 'block';
+};
+
+// Navigate to previous image
+prevArrow.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex - 1 + galleryImagesArray.length) % galleryImagesArray.length;
+    showLightboxImage();
+});
+
+// Navigate to next image
+nextArrow.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % galleryImagesArray.length;
+    showLightboxImage();
+});

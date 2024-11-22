@@ -141,6 +141,30 @@ footer {
     cursor: pointer;
 }
 
+/* Navigation Arrows */
+
+.prev-arrow, .next-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.prev-arrow {
+    left: 20px;
+}
+
+.next-arrow {
+    right: 20px;
+}
+
+.prev-arrow:hover, .next-arrow:hover {
+    color: #ccc;
+}
+
 /* Contact Section */
 
 #contact {
